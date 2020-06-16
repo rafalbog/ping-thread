@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.PushbackInputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -15,16 +16,27 @@ public class Main {
 String [] try1 =  new   String [100] ;
 try1[0]="192.168.1.";
 
-
-for (   int i=1; i<101; i++)
-try1[i]=try1
+        ip_check [] array_of_ips  = new ip_check[100];
 
 
+for (   int i=1; i<100; i++) {
+    array_of_ips[i]= new ip_check();
+    try1[i] = try1[0] + Integer.toString(i);
+array_of_ips[i].setIpv4(try1[i]);
+}
 
-ip_check [] check1 = new [100] ip_check();
+try1[0]="192.168.1.1";
+array_of_ips[0]= new ip_check();
 
-check1.start();
+        array_of_ips[0].setIpv4(try1[0]);
 
+
+
+        for (   int i=1; i<100; i++) {
+
+            array_of_ips[i].start();
+
+        }
 
 
 
@@ -59,14 +71,22 @@ class  ip_check extends Thread{
         return ipv4;
     }
 
-  public ip_check(String ipv4){
-        this.ipv4 =ipv4;
+ // public ip_check(String ipv4){
+   //  /   this.ipv4 =ipv4;
 
-  }
+ // }
+
+    public void setIpv4(String ipv4) {
+        this.ipv4 = ipv4;
+    }
 
     String ipv4;
 
+public ip_check(){
 
+    ipv4="";
+
+}
         public void run(){
 
             try {
